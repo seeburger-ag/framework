@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2020 Vaadin Ltd.
+ * Copyright 2000-2021 Vaadin Ltd.
  *
  * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
  * you may not use this file except in compliance with the License. You may obtain
@@ -514,7 +514,7 @@ public class Design implements Serializable {
     private static Document createHtml(DesignContext designContext) {
         // Create the html tree skeleton.
         Document doc = new Document("");
-        DocumentType docType = new DocumentType("html", "", "", "");
+        DocumentType docType = new DocumentType("html", "", "");
         doc.appendChild(docType);
         Element html = doc.createElement("html");
         doc.appendChild(html);

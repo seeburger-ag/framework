@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2020 Vaadin Ltd.
+ * Copyright 2000-2021 Vaadin Ltd.
  *
  * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
  * you may not use this file except in compliance with the License. You may obtain
@@ -368,8 +368,8 @@ public abstract class BootstrapHandler extends SynchronizedRequestHandler {
 
         Document document = response.getDocument();
 
-        DocumentType doctype = new DocumentType("html", "", "",
-                document.baseUri());
+        DocumentType doctype = new DocumentType("html", "", "");
+        doctype.setBaseUri(document.baseUri());
         document.child(0).before(doctype);
 
         Element head = document.head();
@@ -574,8 +574,8 @@ public abstract class BootstrapHandler extends SynchronizedRequestHandler {
         appendMainScriptTagContents(context, builder);
 
         builder.append("//]]>");
-        mainScriptTag.appendChild(
-                new DataNode(builder.toString(), mainScriptTag.baseUri()));
+        mainScriptTag.appendChild(new DataNode(builder.toString()));
+        mainScriptTag.setBaseUri(mainScriptTag.baseUri());
         fragmentNodes.add(mainScriptTag);
 
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2020 Vaadin Ltd.
+ * Copyright 2000-2021 Vaadin Ltd.
  *
  * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
  * you may not use this file except in compliance with the License. You may obtain
@@ -65,6 +65,8 @@ public class GridDataChangeHandlerWidget extends Composite {
         public RemoteDelayedDataSource(List<String> datasource) {
             super();
             rows = datasource;
+            // Make Grid request not exceed actual size.
+            resetDataAndSize(rows.size());
         }
 
         @Override
@@ -86,7 +88,6 @@ public class GridDataChangeHandlerWidget extends Composite {
         public Object getRowKey(String row) {
             return row;
         }
-
     }
 
     public GridDataChangeHandlerWidget() {

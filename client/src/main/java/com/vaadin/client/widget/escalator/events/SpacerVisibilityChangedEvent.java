@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2020 Vaadin Ltd.
+ * Copyright 2000-2021 Vaadin Ltd.
  *
  * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
  * you may not use this file except in compliance with the License. You may obtain
@@ -42,10 +42,10 @@ public class SpacerVisibilityChangedEvent
      * Creates a spacer visibility changed event.
      *
      * @param rowIndex
-     *         index of row to which the spacer belongs
+     *            index of row to which the spacer belongs
      * @param visible
-     *         {@code true} if the spacer element is shown, {@code false} if the
-     *         spacer element is hidden
+     *            {@code true} if the spacer element is shown, {@code false} if
+     *            the spacer element is hidden
      */
     public SpacerVisibilityChangedEvent(int rowIndex, boolean visible) {
         this.rowIndex = rowIndex;
@@ -65,7 +65,7 @@ public class SpacerVisibilityChangedEvent
      * Gets whether the spacer element is displayed.
      *
      * @return {@code true} if the spacer element is shown, {@code false} if the
-     * spacer element is hidden
+     *         spacer element is hidden
      */
     public boolean isVisible() {
         return visible;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2020 Vaadin Ltd.
+ * Copyright 2000-2021 Vaadin Ltd.
  *
  * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
  * you may not use this file except in compliance with the License. You may obtain
@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.gwt.dom.client.TableRowElement;
+import com.vaadin.client.widgets.Escalator;
 
 /**
  * An internal implementation of the {@link Row} interface.

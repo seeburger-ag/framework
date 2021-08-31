@@ -1,5 +1,5 @@
 /*
- * Copyright 2000-2020 Vaadin Ltd.
+ * Copyright 2000-2021 Vaadin Ltd.
  *
  * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
  * you may not use this file except in compliance with the License. You may obtain
@@ -17,6 +17,8 @@
 package com.vaadin.client.widget.escalator;
 
 import java.util.Map;
+
+import com.vaadin.client.widgets.Escalator;
 
 /**
  * A representation of the columns in an instance of {@link Escalator}.

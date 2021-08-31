@@ -182,6 +182,7 @@ import com.vaadin.client.widget.grid.sort.SortOrder;
 import com.vaadin.client.widgets.Escalator.AbstractRowContainer;
 import com.vaadin.client.widgets.Escalator.SubPartArguments;
 import com.vaadin.client.widgets.Grid.Editor.State;
+import com.vaadin.client.widgets.Grid.StaticSection.StaticCell;
 import com.vaadin.client.widgets.Grid.StaticSection.StaticRow;
 import com.vaadin.shared.data.sort.SortDirection;
 import com.vaadin.shared.ui.grid.ColumnResizeMode;

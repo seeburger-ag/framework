@@ -168,10 +168,22 @@
 						config.rootResponseText = r.responseText;
 
 						var text = r.responseText;
-						if (r.status == 200){
+
+						var isJson = true;
+					    try {
+					        JSON.parse(text);
+					    } catch (e) {
+					        isJson = false;
+					    }
+
+						if (!isJson) {
+							log('Response text does not contain JSON. Retries to load bootstrap...');
+							bootstrapApp(true);
+							return;
+						}
+						else if (r.status == 200 && isJson) {
 							log("Got root config response", text);
 							var updatedConfig = JSON.parse(text);
-
 							// Copy new properties to the config object
 							for (var property in updatedConfig) {
 								if (updatedConfig.hasOwnProperty(property)) {

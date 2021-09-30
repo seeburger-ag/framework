@@ -12,6 +12,14 @@
     <name>Vaadin Framework (Bill of Materials)</name>
     <description>Vaadin Framework (Bill of Materials)</description>
     <url>http://vaadin.com</url>
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
     <dependencyManagement>
         <dependencies>
             <dependency>

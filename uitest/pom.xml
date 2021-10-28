@@ -48,7 +48,7 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.0.0.GA</version>
+            <version>1.1.0.Final</version>
         </dependency>
 
         <dependency>
@@ -353,7 +353,7 @@
                             <arguments>
                                 <argument>-ea</argument>
                                 <argument>-classpath</argument>
-                                <classpath />
+                                <classpath/>
                                 <argument>com.vaadin.launcher.DevelopmentServerLauncher</argument>
                             </arguments>
                             <classpathScope>test</classpathScope>
@@ -370,7 +370,7 @@
                                 <argument>-ea</argument>
                                 <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</argument>
                                 <argument>-classpath</argument>
-                                <classpath />
+                                <classpath/>
                                 <argument>com.vaadin.launcher.DevelopmentServerLauncher</argument>
                             </arguments>
                             <classpathScope>test</classpathScope>

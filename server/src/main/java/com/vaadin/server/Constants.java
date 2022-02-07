@@ -1,7 +1,7 @@
 /*
- * Copyright 2000-2021 Vaadin Ltd.
+ * Copyright 2000-2022 Vaadin Ltd.
  *
- * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4); 
+ * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4);
  * you may not use this file except in compliance with the License. You may obtain
  * a copy of the License at
  *
@@ -66,7 +66,7 @@ public interface Constants {
             + "=================================================================";
 
     // Keep the version number in sync with pom.xml
-    static final String REQUIRED_ATMOSPHERE_RUNTIME_VERSION = "2.2.13.vaadin2";
+    static final String REQUIRED_ATMOSPHERE_RUNTIME_VERSION = "2.2.13.vaadin3";
 
     static final String INVALID_ATMOSPHERE_VERSION_WARNING = "\n"
             + "=================================================================\n"

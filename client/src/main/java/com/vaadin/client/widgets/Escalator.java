@@ -817,16 +817,15 @@ public class Escalator extends Widget
              */
             double prevScrollPos = horizontalScrollbar.getScrollPos();
 
-            double unfrozenPixels = columnConfiguration
-                    .getCalculatedColumnsWidth(Range.between(
-                            columnConfiguration.getFrozenColumnCount(),
+            double columnsWidth = columnConfiguration
+                    .getCalculatedColumnsWidth(Range.between(0,
                             columnConfiguration.getColumnCount()));
-            double frozenPixels = 0; // set scroller to full size even with frozen columns
-            double hScrollOffsetWidth = tableWrapperWidth - frozenPixels;
-            horizontalScrollbar.setOffsetSize(hScrollOffsetWidth);
-            horizontalScrollbar.setScrollSize(unfrozenPixels);
-            horizontalScrollbar.getElement().getStyle().setLeft(frozenPixels,
+
+            horizontalScrollbar.setScrollSize(columnsWidth);
+            horizontalScrollbar.getElement().getStyle().setLeft(0,
                     Unit.PX);
+            horizontalScrollbar.setOffsetSize(tableWrapperWidth);
+
             horizontalScrollbar.setScrollPos(prevScrollPos);
 
             /*

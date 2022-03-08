@@ -9,7 +9,7 @@
     <artifactId>vaadin-root</artifactId>
     <name>vaadin-root</name>
     <packaging>pom</packaging>
-    <version>7.7.30.SEE2-SNAPSHOT</version>
+    <version>7.7.30.SEE2</version>
 
     <prerequisites>
         <maven>3.1.0</maven>
@@ -91,7 +91,7 @@
         <connection>scm:git:git@github.com:seeburger-ag/vaadin-framework.git</connection>
         <developerConnection>scm:git:git@github.com:seeburger-ag/vaadin-framework.git</developerConnection>
         <url>https://github.com/seeburger-ag/vaadin-framework</url>
-      <tag>HEAD</tag>
+      <tag>vaadin-root-7.7.30.SEE2</tag>
   </scm>
 
     <modules>

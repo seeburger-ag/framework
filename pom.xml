@@ -49,6 +49,9 @@
 
         <jetty.version>9.4.38.v20210224</jetty.version>
         <phantomjs.version>2.1.1</phantomjs.version>
+
+        <jna.version>5.10.0</jna.version>
+        <oshi.version>6.1.4</oshi.version>
     </properties>
 
     <repositories>

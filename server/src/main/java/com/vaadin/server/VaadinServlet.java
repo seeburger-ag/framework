@@ -1265,8 +1265,12 @@ public class VaadinServlet extends HttpServlet implements Constants {
             }
         }
         // If not a jar check if a file path directory.
-        File file = new File(resourceURI);
-        return "file".equals(resource.getProtocol()) && file.isDirectory();
+        if ("file".equals(resourceURI.getScheme())) {
+            File file = new File(resourceURI);
+            return file.isDirectory();
+        } else {
+            return false;
+        }
     }
 
     // Find entry pathInJar within nested jar pathOfJar within war pathOfWar.

@@ -86,9 +86,8 @@
     <description>Vaadin Framework Root Pom</description>
     <licenses>
         <license>
-            <name>Apache License Version 2.0</name>
-            <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <name>cvdl4</name>
+            <url>https://vaadin.com/license/cvdl-4</url>
         </license>
     </licenses>
     <scm>

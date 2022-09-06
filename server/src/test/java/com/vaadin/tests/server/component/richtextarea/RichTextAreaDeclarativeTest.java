@@ -10,7 +10,7 @@ public class RichTextAreaDeclarativeTest
 
     private String getBasicDesign() {
         return "<vaadin-rich-text-area null-representation='' null-setting-allowed>\n"
-                + "\n      <b>Header</b><br/>Some text\n      "
+                + "\n      <b>Header</b> <br/>Some text\n      "
                 + "</vaadin-rich-text-area>";
     }
 
@@ -18,7 +18,7 @@ public class RichTextAreaDeclarativeTest
         RichTextArea rta = new RichTextArea();
         rta.setNullRepresentation("");
         rta.setNullSettingAllowed(true);
-        rta.setValue("<b>Header</b>\n<br>Some text");
+        rta.setValue("<b>Header</b> \n<br>Some text");
         return rta;
     }
 

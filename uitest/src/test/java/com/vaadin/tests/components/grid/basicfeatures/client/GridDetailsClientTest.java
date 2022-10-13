@@ -85,8 +85,9 @@ public class GridDetailsClientTest extends GridBasicClientFeaturesTest {
         getGridElement().scrollToRow(101);
 
         TestBenchElement details = getGridElement().getDetails(100);
-        assertTrue("Unexpected details content",
-                details.getText().startsWith("Row: 100."));
+        String text = details.getText();
+        assertTrue("Unexpected details content: " + text,
+                text.startsWith("Row: 100."));
     }
 
     @Test

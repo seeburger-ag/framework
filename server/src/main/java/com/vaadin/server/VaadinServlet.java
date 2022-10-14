@@ -1210,6 +1210,9 @@ public class VaadinServlet extends HttpServlet implements Constants {
     }
 
     private boolean resourceIsDirectory(URL resource) {
+        if ("bundle".equals(resource.getProtocol())) {
+            return false;
+        }
         if (resource.getPath().endsWith("/")) {
             return true;
         }

@@ -205,7 +205,7 @@
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>2.2.6</version>
+            <version>2.7.1</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -353,7 +353,7 @@
                             <arguments>
                                 <argument>-ea</argument>
                                 <argument>-classpath</argument>
-                                <classpath />
+                                <classpath/>
                                 <argument>com.vaadin.launcher.DevelopmentServerLauncher</argument>
                             </arguments>
                             <classpathScope>test</classpathScope>
@@ -370,7 +370,7 @@
                                 <argument>-ea</argument>
                                 <argument>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</argument>
                                 <argument>-classpath</argument>
-                                <classpath />
+                                <classpath/>
                                 <argument>com.vaadin.launcher.DevelopmentServerLauncher</argument>
                             </arguments>
                             <classpathScope>test</classpathScope>

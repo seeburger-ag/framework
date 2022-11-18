@@ -13,7 +13,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.vaadin.shared.ui.grid.Range;
 import com.vaadin.shared.ui.grid.ScrollDestination;
@@ -84,10 +86,24 @@ public class GridDetailsClientTest extends GridBasicClientFeaturesTest {
         // scroll a bit beyond so we see below.
         getGridElement().scrollToRow(101);
 
-        TestBenchElement details = getGridElement().getDetails(100);
-        String text = details.getText();
-        assertTrue("Unexpected details content: " + text,
-                text.startsWith("Row: 100."));
+        final TestBenchElement details = getGridElement().getDetails(100);
+        waitUntil(new ExpectedCondition<Object>() {
+            String expected = "Row: 100.";
+            private String actual;
+
+            @Override
+            public Object apply(WebDriver driver) {
+                actual = details.getText();
+                return actual.startsWith(expected);
+            }
+
+            @Override
+            public String toString() {
+                // waiting for ...
+                return "details content to start with '" + expected
+                        + "' (was: '" + actual + "')";
+            }
+        });
     }
 
     @Test

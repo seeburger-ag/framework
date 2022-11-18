@@ -20,13 +20,23 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.tests.components.AbstractTestUI;
 import com.vaadin.tests.widgetset.TestingWidgetSet;
 import com.vaadin.tests.widgetset.server.LayoutDuringStateUpdateComponent;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Button.ClickListener;
 
 @Widgetset(TestingWidgetSet.NAME)
 public class LayoutDuringStateUpdate extends AbstractTestUI {
 
     @Override
     protected void setup(VaadinRequest request) {
-        addComponent(new LayoutDuringStateUpdateComponent());
+        // delay adding of the component to ensure unrelated layouting calls
+        // don't interfere with the test
+        addComponent(new Button("Add component", new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent e) {
+                addComponent(new LayoutDuringStateUpdateComponent());
+            }
+        }));
     }
 
 }

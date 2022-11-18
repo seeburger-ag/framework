@@ -4,11 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
+import com.vaadin.testbench.TestBenchElement;
 import com.vaadin.tests.components.grid.basicfeatures.EscalatorBasicClientFeaturesTest;
 
 public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
@@ -163,8 +165,7 @@ public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
         scrollVerticallyTo(2000); // more like 1857, but this should be enough.
 
         // if not found, an exception is thrown here
-        assertTrue("Wanted cell was not visible",
-                isElementPresent(By.xpath("//td[text()='Cell: 9,99']")));
+        waitUntilCellPresent("Cell: 9,99");
     }
 
     @Test
@@ -175,8 +176,7 @@ public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
         scrollVerticallyTo(2000); // more like 1857, but this should be enough.
 
         // if not found, an exception is thrown here
-        assertTrue("Wanted cell was not visible",
-                isElementPresent(By.xpath("//td[text()='Cell: 9,99']")));
+        waitUntilCellPresent("Cell: 9,99");
     }
 
     @Test
@@ -224,15 +224,13 @@ public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
 
         scrollVerticallyTo(BOTTOM_SCROLL_POSITION);
         selectMenuPath(COLUMNS_AND_ROWS, BODY_ROWS, REMOVE_50_ROWS_FROM_BOTTOM);
-        assertEquals("Row 49: 0,49", getBodyCell(-1, 0).getText());
+
+        waitUntilCellPresent(-1, 0, "Row 49: 0,49");
 
         scrollVerticallyTo(0);
 
-        // let the DOM organize itself
-        Thread.sleep(500);
-
         // if something goes wrong, it'll explode before this.
-        assertEquals("Row 0: 0,0", getBodyCell(0, 0).getText());
+        waitUntilCellPresent(0, 0, "Row 0: 0,0");
     }
 
     @Test
@@ -244,15 +242,13 @@ public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
         // bottom minus 15 rows.
         scrollVerticallyTo(BOTTOM_SCROLL_POSITION - 15 * 20);
         selectMenuPath(COLUMNS_AND_ROWS, BODY_ROWS, REMOVE_50_ROWS_FROM_BOTTOM);
-        assertEquals("Row 49: 0,49", getBodyCell(-1, 0).getText());
+
+        waitUntilCellPresent(-1, 0, "Row 49: 0,49");
 
         scrollVerticallyTo(0);
 
-        // let the DOM organize itself
-        Thread.sleep(500);
-
         // if something goes wrong, it'll explode before this.
-        assertEquals("Row 0: 0,0", getBodyCell(0, 0).getText());
+        waitUntilCellPresent(0, 0, "Row 0: 0,0");
     }
 
     @Test
@@ -264,15 +260,13 @@ public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
         scrollVerticallyTo(BOTTOM_SCROLL_POSITION);
         selectMenuPath(COLUMNS_AND_ROWS, BODY_ROWS,
                 REMOVE_50_ROWS_FROM_ALMOST_BOTTOM);
-        assertEquals("Row 49: 0,99", getBodyCell(-1, 0).getText());
+
+        waitUntilCellPresent(-1, 0, "Row 49: 0,99");
 
         scrollVerticallyTo(0);
 
-        // let the DOM organize itself
-        Thread.sleep(500);
-
         // if something goes wrong, it'll explode before this.
-        assertEquals("Row 0: 0,0", getBodyCell(0, 0).getText());
+        waitUntilCellPresent(0, 0, "Row 0: 0,0");
     }
 
     @Test
@@ -286,16 +280,52 @@ public class EscalatorRowColumnTest extends EscalatorBasicClientFeaturesTest {
         selectMenuPath(COLUMNS_AND_ROWS, BODY_ROWS,
                 REMOVE_50_ROWS_FROM_ALMOST_BOTTOM);
 
-        // let the DOM organize itself
-        Thread.sleep(500);
-        assertEquals("Row 49: 0,99", getBodyCell(-1, 0).getText());
+        waitUntilCellPresent(-1, 0, "Row 49: 0,99");
 
         scrollVerticallyTo(0);
 
-        // let the DOM organize itself
-        Thread.sleep(500);
-
         // if something goes wrong, it'll explode before this.
-        assertEquals("Row 0: 0,0", getBodyCell(0, 0).getText());
+        waitUntilCellPresent(0, 0, "Row 0: 0,0");
+    }
+
+    private void waitUntilCellPresent(final String content) {
+        waitUntil(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver arg0) {
+                return isElementPresent(
+                        By.xpath("//td[text()='" + content + "']"));
+            }
+
+            @Override
+            public String toString() {
+                // waiting for ...
+                return "the cell '" + content + "' to become visible";
+            }
+        });
+    }
+
+    private void waitUntilCellPresent(final int row, final int col,
+            final String content) {
+        waitUntil(new ExpectedCondition<Boolean>() {
+            String actual;
+
+            @Override
+            public Boolean apply(WebDriver arg0) {
+                TestBenchElement cell = getBodyCell(row, col);
+                if (cell == null) {
+                    return false;
+                }
+                actual = cell.getText();
+                return content.equals(actual);
+            }
+
+            @Override
+            public String toString() {
+                // waiting for ...
+                return "the content of cell (" + row + ", " + col
+                        + ") to become '" + content + "' (was: '" + actual
+                        + "')";
+            }
+        });
     }
 }

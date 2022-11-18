@@ -1,12 +1,12 @@
 package com.vaadin.tests.components.grid.basicfeatures;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -86,16 +86,22 @@ public class GridClientDataSourcesTest extends MultiBrowserTest {
     }
 
     private void assertCellPresent(String content) {
-        assertNotNull(
-                "A cell with content \"" + content + "\" should've been found",
-                findByXPath("//td[text()='" + content + "']"));
+        try {
+            waitForElementPresent(By.xpath("//td[text()='" + content + "']"));
+        } catch (TimeoutException e) {
+            fail("A cell with content \"" + content
+                    + "\" should've been found");
+        }
     }
 
     private void assertCellNotPresent(String content) {
-        assertNull(
-                "A cell with content \"" + content
-                        + "\" should've not been found",
-                findByXPath("//td[text()='" + content + "']"));
+        try {
+            waitForElementNotPresent(
+                    By.xpath("//td[text()='" + content + "']"));
+        } catch (TimeoutException e) {
+            fail("A cell with content \"" + content
+                    + "\" should not have been found");
+        }
     }
 
     private void scrollToTop() {

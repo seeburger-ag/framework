@@ -1,8 +1,12 @@
 package com.vaadin.tests.components.grid.basicfeatures.server;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +22,7 @@ public class LoadingIndicatorTest extends GridBasicFeaturesTest {
 
         selectMenuPath("Component", "State", "Container delay", "2000");
 
-        GridElement gridElement = $(GridElement.class).first();
+        final GridElement gridElement = $(GridElement.class).first();
 
         Assert.assertFalse(
                 "Loading indicator should not be visible before disabling waitForVaadin",
@@ -27,7 +31,20 @@ public class LoadingIndicatorTest extends GridBasicFeaturesTest {
         testBench().disableWaitForVaadin();
 
         // Scroll to a completely new location
-        gridElement.getCell(200, 1);
+        try {
+            waitUntil(new ExpectedCondition<Object>() {
+                @Override
+                public Object apply(WebDriver input) {
+                    try {
+                        return gridElement.getCell(200, 1);
+                    } catch (NoSuchElementException e) {
+                        return null;
+                    }
+                }
+            });
+        } catch (TimeoutException e) {
+            fail("Didn't manage to scroll to cell (200, 1)");
+        }
 
         // Wait for loading indicator delay
         waitUntil(ExpectedConditions.visibilityOfElementLocated(
@@ -38,7 +55,20 @@ public class LoadingIndicatorTest extends GridBasicFeaturesTest {
 
         // Scroll so much that more data gets fetched, but not so much that
         // missing rows are shown
-        gridElement.getCell(230, 1);
+        try {
+            waitUntil(new ExpectedCondition<Object>() {
+                @Override
+                public Object apply(WebDriver input) {
+                    try {
+                        return gridElement.getCell(230, 1);
+                    } catch (NoSuchElementException e) {
+                        return null;
+                    }
+                }
+            });
+        } catch (TimeoutException e) {
+            fail("Didn't manage to scroll to cell (230, 1)");
+        }
 
         // Wait for potentially triggered loading indicator to become visible
         Thread.sleep(500);

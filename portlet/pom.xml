@@ -1,22 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-root</artifactId>
         <version>7.7-SNAPSHOT</version>
     </parent>
-    <groupId>com.vaadin</groupId>
-    <artifactId>vaadin-server</artifactId>
-    <name>vaadin-server</name>
+    <artifactId>vaadin-portlet</artifactId>
+    <name>vaadin-portlet</name>
     <packaging>jar</packaging>
 
     <url>https://vaadin.com/</url>
-    <description>Vaadin server</description>
+    <description>Vaadin Portlet</description>
 
     <dependencies>
         <!-- API DEPENDENCIES -->
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-server</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Liferay Portal Service -->
+        <dependency>
+            <groupId>com.liferay.portal</groupId>
+            <artifactId>portal-service</artifactId>
+            <version>${liferay.portal.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--Portlet API version 2.0 (JSR-286) -->
+        <dependency>
+            <groupId>javax.portlet</groupId>
+            <artifactId>portlet-api</artifactId>
+            <version>${javax.portlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!--Servlet API -->
         <dependency>
@@ -218,11 +238,11 @@
                         <configuration>
                             <target>
                                 <property name="vaadinBootstrap.js"
-                                    location="${project.build.outputDirectory}/VAADIN/vaadinBootstrap.js" />
+                                          location="${project.build.outputDirectory}/VAADIN/vaadinBootstrap.js" />
 
                                 <!-- Gzipped version -->
                                 <gzip src="${vaadinBootstrap.js}"
-                                    destfile="${vaadinBootstrap.js}.gz" />
+                                      destfile="${vaadinBootstrap.js}.gz" />
                             </target>
                         </configuration>
                     </execution>

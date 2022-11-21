@@ -63,6 +63,10 @@ public class VaadinPortletResponse implements VaadinResponse {
         this.vaadinService = vaadinService;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see MimeResponse#getPortletOutputStream()
+     */
     @Override
     public OutputStream getOutputStream() throws IOException {
         if (response instanceof MimeResponse) {
@@ -83,6 +87,10 @@ public class VaadinPortletResponse implements VaadinResponse {
         return response;
     }
 
+    /**
+     *{@inheritDoc}
+     * @see MimeResponse#setContentType(String)
+     */
     @Override
     public void setContentType(String type) {
         if (response instanceof MimeResponse) {
@@ -102,6 +110,10 @@ public class VaadinPortletResponse implements VaadinResponse {
 
     }
 
+    /**
+     * {@inheritDoc}
+     * @see MimeResponse#getWriter()
+     */
     @Override
     public PrintWriter getWriter() throws IOException {
         if (response instanceof MimeResponse) {
@@ -112,12 +124,21 @@ public class VaadinPortletResponse implements VaadinResponse {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @see ResourceResponse#HTTP_STATUS_CODE
+     */
     @Override
     public void setStatus(int responseStatus) {
         response.setProperty(ResourceResponse.HTTP_STATUS_CODE,
                 Integer.toString(responseStatus));
     }
 
+    /**
+     * {@inheritDoc}
+     * @see PortletResponse#setProperty(String, String)
+     */
     @Override
     public void setHeader(String name, String value) {
         response.setProperty(name, value);
@@ -182,6 +203,10 @@ public class VaadinPortletResponse implements VaadinResponse {
         return vaadinService;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see PortletResponse#addProperty(Cookie)
+     */
     @Override
     public void addCookie(Cookie cookie) {
         response.addProperty(cookie);

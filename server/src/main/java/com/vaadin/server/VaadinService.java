@@ -44,8 +44,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.portlet.Portlet;
-import javax.portlet.PortletContext;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -315,7 +313,6 @@ public abstract class VaadinService implements Serializable {
      * @return a String specifying the file's MIME type
      *
      * @see ServletContext#getMimeType(String)
-     * @see PortletContext#getMimeType(String)
      */
     public abstract String getMimeType(String resourceName);
 
@@ -612,11 +609,11 @@ public abstract class VaadinService implements Serializable {
      * Note: Overriding this method is not recommended, for custom lock storage
      * strategy override {@link #getSessionLock(WrappedSession)} and
      * {@link #setSessionLock(WrappedSession,Lock)} instead.
-     * 
+     *
      * @param wrappedSession
      *            The session to lock
      * @return Lock instance
-     * 
+     *
      * @throws IllegalStateException
      *             if the session is invalidated before it can be locked
      */
@@ -1952,7 +1949,6 @@ public abstract class VaadinService implements Serializable {
      *
      * @see #addServiceDestroyListener(ServiceDestroyListener)
      * @see Servlet#destroy()
-     * @see Portlet#destroy()
      *
      * @since 7.2
      */

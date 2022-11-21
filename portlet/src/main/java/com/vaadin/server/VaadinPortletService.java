@@ -32,6 +32,7 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
+import javax.servlet.ServletContext;
 
 import com.vaadin.server.VaadinPortlet.RequestType;
 import com.vaadin.server.communication.PortletBootstrapHandler;
@@ -165,6 +166,10 @@ public class VaadinPortletService extends VaadinService {
         return getPortlet().getPortletContext();
     }
 
+    /**
+     * {@inheritDoc}
+     * @see PortletContext#getMimeType(String)
+     */
     @Override
     public String getMimeType(String resourceName) {
         return getPortletContext().getMimeType(resourceName);

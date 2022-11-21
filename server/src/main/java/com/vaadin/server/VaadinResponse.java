@@ -21,9 +21,6 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 
-import javax.portlet.MimeResponse;
-import javax.portlet.PortletResponse;
-import javax.portlet.ResourceResponse;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -44,8 +41,6 @@ public interface VaadinResponse extends Serializable {
      * @param statusCode
      *            the status code to set
      * @see HttpServletResponse#setStatus(int)
-     *
-     * @see ResourceResponse#HTTP_STATUS_CODE
      */
     public void setStatus(int statusCode);
 
@@ -58,7 +53,6 @@ public interface VaadinResponse extends Serializable {
      *            a string specifying the MIME type of the content
      *
      * @see ServletResponse#setContentType(String)
-     * @see MimeResponse#setContentType(String)
      */
     public void setContentType(String contentType);
 
@@ -72,7 +66,6 @@ public interface VaadinResponse extends Serializable {
      *            the header value.
      *
      * @see HttpServletResponse#setHeader(String, String)
-     * @see PortletResponse#setProperty(String, String)
      */
     public void setHeader(String name, String value);
 
@@ -102,7 +95,6 @@ public interface VaadinResponse extends Serializable {
      *
      * @see #getWriter()
      * @see ServletResponse#getOutputStream()
-     * @see MimeResponse#getPortletOutputStream()
      */
     public OutputStream getOutputStream() throws IOException;
 
@@ -120,7 +112,6 @@ public interface VaadinResponse extends Serializable {
      *
      * @see #getOutputStream()
      * @see ServletResponse#getWriter()
-     * @see MimeResponse#getWriter()
      */
     public PrintWriter getWriter() throws IOException;
 
@@ -166,7 +157,6 @@ public interface VaadinResponse extends Serializable {
      *            the Cookie to return to the client
      *
      * @see HttpServletResponse#addCookie(Cookie)
-     * @see PortletResponse#addProperty(Cookie)
      */
     public void addCookie(Cookie cookie);
 

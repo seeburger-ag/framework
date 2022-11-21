@@ -19,12 +19,11 @@ package com.vaadin.server;
 import java.io.Serializable;
 import java.util.Set;
 
-import javax.portlet.PortletSession;
 import javax.servlet.http.HttpSession;
 
 /**
  * A generic session, wrapping a more specific session implementation, e.g.
- * {@link HttpSession} or {@link PortletSession}.
+ * {@link HttpSession} or {@code PortletSession}.
  *
  *
  * @author Vaadin Ltd

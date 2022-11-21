@@ -26,8 +26,6 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.portlet.ClientDataRequest;
-import javax.portlet.PortletRequest;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +72,6 @@ public interface VaadinRequest extends Serializable {
      * stream returned by {@link #getInputStream()}.
      *
      * @see javax.servlet.ServletRequest#getContentLength()
-     * @see javax.portlet.ClientDataRequest#getContentLength()
      *
      * @return content length in bytes
      */
@@ -137,7 +134,6 @@ public interface VaadinRequest extends Serializable {
      * request. The context path always comes first in a request URI.
      *
      * @see HttpServletRequest#getContextPath()
-     * @see PortletRequest#getContextPath()
      *
      * @return a String specifying the portion of the request URI that indicates
      *         the context of the request
@@ -150,7 +146,6 @@ public interface VaadinRequest extends Serializable {
      *
      * @see WrappedSession
      * @see HttpServletRequest#getSession()
-     * @see PortletRequest#getPortletSession()
      *
      * @return the wrapped session for this request
      */
@@ -193,7 +188,6 @@ public interface VaadinRequest extends Serializable {
      * @return the preferred Locale
      *
      * @see ServletRequest#getLocale()
-     * @see PortletRequest#getLocale()
      */
     public Locale getLocale();
 
@@ -215,7 +209,6 @@ public interface VaadinRequest extends Serializable {
      * @return a boolean indicating if the request is secure
      *
      * @see ServletRequest#isSecure()
-     * @see PortletRequest#isSecure()
      */
     public boolean isSecure();
 
@@ -250,7 +243,6 @@ public interface VaadinRequest extends Serializable {
      *         request, or <code>null</code> if the request has no cookies
      *
      * @see HttpServletRequest#getCookies()
-     * @see PortletRequest#getCookies()
      */
     public Cookie[] getCookies();
 
@@ -264,7 +256,6 @@ public interface VaadinRequest extends Serializable {
      *         <code>null</code> if the request was not authenticated.
      *
      * @see HttpServletRequest#getAuthType()
-     * @see PortletRequest#getAuthType()
      */
     public String getAuthType();
 
@@ -278,7 +269,6 @@ public interface VaadinRequest extends Serializable {
      *         <code>null</code> if the user login is not known.
      *
      * @see HttpServletRequest#getRemoteUser()
-     * @see PortletRequest#getRemoteUser()
      */
     public String getRemoteUser();
 
@@ -292,7 +282,6 @@ public interface VaadinRequest extends Serializable {
      *         been authenticated
      *
      * @see HttpServletRequest#getUserPrincipal()
-     * @see PortletRequest#getUserPrincipal()
      */
     public Principal getUserPrincipal();
 
@@ -309,7 +298,6 @@ public interface VaadinRequest extends Serializable {
      *         authenticated
      *
      * @see HttpServletRequest#isUserInRole(String)
-     * @see PortletRequest#isUserInRole(String)
      */
     public boolean isUserInRole(String role);
 
@@ -322,7 +310,6 @@ public interface VaadinRequest extends Serializable {
      *            a String specifying the name of the attribute to remove
      *
      * @see ServletRequest#removeAttribute(String)
-     * @see PortletRequest#removeAttribute(String)
      */
     public void removeAttribute(String name);
 
@@ -335,7 +322,6 @@ public interface VaadinRequest extends Serializable {
      *         attributes
      *
      * @see ServletRequest#getAttributeNames()
-     * @see PortletRequest#getAttributeNames()
      */
     public Enumeration<String> getAttributeNames();
 
@@ -349,7 +335,6 @@ public interface VaadinRequest extends Serializable {
      * @return an Enumeration of preferred Locale objects for the client
      *
      * @see HttpServletRequest#getLocales()
-     * @see PortletRequest#getLocales()
      */
     public Enumeration<Locale> getLocales();
 
@@ -386,7 +371,6 @@ public interface VaadinRequest extends Serializable {
      *         if the request does not specify a character encoding
      *
      * @see ServletRequest#getCharacterEncoding()
-     * @see ClientDataRequest#getCharacterEncoding()
      */
     public String getCharacterEncoding();
 
@@ -408,7 +392,6 @@ public interface VaadinRequest extends Serializable {
      *             if an input or output exception occurred
      *
      * @see ServletRequest#getReader()
-     * @see ClientDataRequest#getReader()
      */
     public BufferedReader getReader() throws IOException;
 
@@ -420,7 +403,6 @@ public interface VaadinRequest extends Serializable {
      *         request was made
      *
      * @see HttpServletRequest#getMethod()
-     * @see ClientDataRequest#getMethod()
      */
     public String getMethod();
 

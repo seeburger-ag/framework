@@ -59,6 +59,10 @@ public class VaadinPortletRequest extends PortletRequestWrapper
         this.vaadinService = vaadinService;
     }
 
+    /**
+     * {@inheritDoc}
+     * @see javax.portlet.ClientDataRequest#getContentLength()
+     */
     @Override
     public int getContentLength() {
         try {
@@ -106,11 +110,19 @@ public class VaadinPortletRequest extends PortletRequestWrapper
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @see PortletRequest#getPortletSession()
+     */
     @Override
     public WrappedSession getWrappedSession() {
         return getWrappedSession(true);
     }
 
+    /**
+     * {@inheritDoc}
+     * @see PortletRequest#getPortletSession(boolean)
+     */
     @Override
     public WrappedSession getWrappedSession(boolean allowSessionCreation) {
         PortletSession session = getPortletSession(allowSessionCreation);

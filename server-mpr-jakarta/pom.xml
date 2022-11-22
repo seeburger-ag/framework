@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.vaadin</groupId>
+        <artifactId>vaadin-root</artifactId>
+        <version>7.7-SNAPSHOT</version>
+    </parent>
+    <artifactId>vaadin-server-mpr-jakarta</artifactId>
+    <name>vaadin-server-mpr-jakarta</name>
+    <packaging>jar</packaging>
+
+    <url>https://vaadin.com/</url>
+    <description>Vaadin 7 Server package for MPR 24+</description>
+
+    <properties>
+        <sonar.skip>true</sonar.skip>
+    </properties>
+    <dependencies>
+        <!-- Project modules -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>vaadin-server</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Eclipse Transformer plugin for Jakarta -->
+            <plugin>
+                <groupId>org.eclipse.transformer</groupId>
+                <artifactId>transformer-maven-plugin</artifactId>
+                <version>0.5.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <rules>
+                        <jakartaDefaults>true</jakartaDefaults>
+                    </rules>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <artifact>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>vaadin-server</artifactId>
+                                <version>${project.version}</version>
+                            </artifact>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <artifact>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>vaadin-server</artifactId>
+                                <version>${project.version}</version>
+                                <classifier>sources</classifier>
+                            </artifact>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>attach-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <artifact>
+                                <groupId>${project.groupId}</groupId>
+                                <artifactId>vaadin-server</artifactId>
+                                <version>${project.version}</version>
+                                <classifier>javadoc</classifier>
+                            </artifact>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

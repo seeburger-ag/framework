@@ -108,6 +108,7 @@
         <module>widgets</module>
         <module>uitest</module>
         <module>liferay</module>
+        <module>server-mpr-jakarta</module>
         <module>all</module>
         <!-- Nexus staging bug needs the last module to be deployed. -->
         <module>bom</module>

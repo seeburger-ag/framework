@@ -28,6 +28,7 @@ public class ClassesSerializableTest {
     private static String[] BASE_PACKAGES = { "com.vaadin" };
 
     private static String[] EXCLUDED_PATTERNS = { //
+            "com\\.vaadin\\.open\\..*", //        
             "com\\.vaadin\\.demo\\..*", //
             "com\\.vaadin\\.external\\.org\\.apache\\.commons\\.fileupload\\..*", //
             "com\\.vaadin\\.launcher\\..*", //

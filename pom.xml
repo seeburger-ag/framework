@@ -86,8 +86,9 @@
     <description>Vaadin Framework Root Pom</description>
     <licenses>
         <license>
-            <name>cvdl4</name>
-            <url>https://vaadin.com/license/cvdl-4</url>
+            <name>Vaadin Commercial License</name>
+            <distribution>repo</distribution>
+            <url>https://vaadin.com/commercial-license-and-service-terms</url>
         </license>
     </licenses>
     <scm>

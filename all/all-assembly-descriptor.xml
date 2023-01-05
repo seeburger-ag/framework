@@ -24,6 +24,7 @@
 				<exclude>${project.groupId}:vaadin-shared</exclude>
 				<exclude>${project.groupId}:vaadin-push</exclude>
 				<exclude>${project.groupId}:vaadin-server</exclude>
+				<exclude>${project.groupId}:vaadin-server-mpr-jakarta</exclude>
 				<exclude>${project.groupId}:vaadin-themes</exclude>
 				<exclude>${project.groupId}:vaadin-client</exclude>
 				<exclude>${project.groupId}:vaadin-client-compiler</exclude>

@@ -97,6 +97,7 @@ import com.vaadin.util.CurrentInstance;
  *
  * @since 7.0
  */
+@SuppressWarnings("deprecation")
 public abstract class UI extends AbstractSingleComponentContainer
         implements Action.Container, Action.Notifier, PollNotifier,
         LegacyComponent, Focusable {
@@ -403,7 +404,7 @@ public abstract class UI extends AbstractSingleComponentContainer
     public Iterator<Component> iterator() {
         // TODO could directly create some kind of combined iterator instead of
         // creating a new ArrayList
-        ArrayList<Component> components = new ArrayList<Component>();
+        List<Component> components = new ArrayList<Component>();
 
         if (getContent() != null) {
             components.add(getContent());
@@ -488,8 +489,7 @@ public abstract class UI extends AbstractSingleComponentContainer
         if (session == null) {
             return null;
         } else {
-            return session.toString() + " for "
-                    + session.getService().getServiceName();
+            return session + " for " + session.getService().getServiceName();
         }
     }
 
@@ -1389,7 +1389,6 @@ public abstract class UI extends AbstractSingleComponentContainer
                 CurrentInstance.restoreInstances(old);
             }
         }
-
     }
 
     /**
@@ -1732,7 +1731,7 @@ public abstract class UI extends AbstractSingleComponentContainer
      *
      * Used internally for communication tracking.
      *
-     * @param lastProcessedServerMessageId
+     * @param lastProcessedClientToServerId
      *            the id of the last processed server message
      * @since 7.6
      */

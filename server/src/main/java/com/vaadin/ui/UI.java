@@ -49,6 +49,7 @@ import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.server.VaadinSession.State;
+import com.vaadin.server.communication.AtmospherePushConnection;
 import com.vaadin.server.communication.PushConnection;
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.EventId;
@@ -720,6 +721,12 @@ public abstract class UI extends AbstractSingleComponentContainer
         // listeners, if any, only after refresh(). So we momentarily assign the
         // old values back before setting the new values again to ensure the
         // events are properly fired.
+
+        PushConnection pushConnection = getPushConnection();
+        if (pushConnection instanceof AtmospherePushConnection
+                && pushConnection.isConnected()) {
+            pushConnection.disconnect();
+        }
 
         Page page = getPage();
 

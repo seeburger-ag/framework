@@ -410,6 +410,10 @@ public class AtmospherePushConnection implements PushConnection {
         getConnectionStateHandler().pushReconnectPending(this);
     }
 
+    private int getLastSeenServerSyncId() {
+        return connection.getMessageHandler().getLastSeenServerSyncId();
+    }
+
     public static abstract class AbstractJSO extends JavaScriptObject {
         protected AbstractJSO() {
 
@@ -511,6 +515,7 @@ public class AtmospherePushConnection implements PushConnection {
             trackMessageLength: true,
             enableProtocol: true,
             handleOnlineOffline: false,
+            executeCallbackBeforeReconnect: true,
             messageDelimiter: String.fromCharCode(@com.vaadin.shared.communication.PushConstants::MESSAGE_DELIMITER)
         };
     }-*/;
@@ -545,6 +550,11 @@ public class AtmospherePushConnection implements PushConnection {
         config.onClientTimeout = $entry(function(request) {
             self.@com.vaadin.client.communication.AtmospherePushConnection::onClientTimeout(*)(request);
         });
+        config.headers = {
+            'X-Vaadin-LastSeenServerSyncId': function() {
+                return self.@com.vaadin.client.communication.AtmospherePushConnection::getLastSeenServerSyncId(*)();
+            }
+        };
 
         return $wnd.vaadinPush.atmosphere.subscribe(config);
     }-*/;

@@ -25,6 +25,7 @@ import org.atmosphere.cpr.AtmosphereHandler;
 import org.atmosphere.cpr.AtmosphereInterceptor;
 import org.atmosphere.cpr.AtmosphereRequest;
 import org.atmosphere.cpr.AtmosphereResponse;
+import org.atmosphere.cpr.BroadcasterConfig;
 import org.atmosphere.interceptor.HeartbeatInterceptor;
 import org.atmosphere.util.VoidAnnotationProcessor;
 
@@ -51,6 +52,7 @@ import com.vaadin.shared.communication.PushConstants;
  * @author Vaadin Ltd
  * @since 7.1
  */
+@SuppressWarnings("deprecation")
 public class PushRequestHandler
         implements RequestHandler, SessionExpiredHandler {
 
@@ -102,6 +104,11 @@ public class PushRequestHandler
                 // Map the (possibly pre-initialized) handler to the actual push
                 // handler
                 ((PushAtmosphereHandler) handler).setPushHandler(pushHandler);
+                BroadcasterConfig broadcasterConfig = handlerWrapper.broadcaster
+                        .getBroadcasterConfig();
+                broadcasterConfig.addFilter(new LongPollingCacheFilter());
+                broadcasterConfig.addFilter(
+                        new AtmospherePushConnection.PushMessageUnwrapFilter());
             }
 
         }

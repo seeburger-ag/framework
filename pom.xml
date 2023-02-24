@@ -46,7 +46,7 @@
         <!-- Dependency unpack directory -->
         <dependency.unpack.directory>${project.build.directory}/dependency-unpack</dependency.unpack.directory>
 
-        <jetty.version>9.4.38.v20210224</jetty.version>
+        <jetty.version>9.4.47.v20220610</jetty.version>
         <phantomjs.version>2.1.1</phantomjs.version>
     </properties>
 
@@ -253,7 +253,7 @@
                                         </goals>
                                     </pluginExecutionFilter>
                                     <action>
-                                        <ignore />
+                                        <ignore/>
                                     </action>
                                 </pluginExecution>
                             </pluginExecutions>

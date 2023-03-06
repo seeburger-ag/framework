@@ -76,6 +76,7 @@ import elemental.json.JsonObject;
  * @since 7.6
  * @author Vaadin Ltd
  */
+@SuppressWarnings("deprecation")
 public class MessageHandler {
 
     public static final String JSON_COMMUNICATION_PREFIX = "for(;;);[";
@@ -136,7 +137,7 @@ public class MessageHandler {
     private int sessionExpirationInterval;
 
     /**
-     * Holds the time spent rendering the last request
+     * Holds the time spent rendering the last request.
      */
     protected int lastProcessingTime;
 
@@ -222,7 +223,7 @@ public class MessageHandler {
      * Handles a received UIDL JSON text, parsing it, and passing it on to the
      * appropriate handlers, while logging timing information.
      *
-     * @param jsonText
+     * @param json
      *            The JSON to handle
      */
     public void handleMessage(final ValueMap json) {
@@ -260,8 +261,8 @@ public class MessageHandler {
         boolean hasResynchronize = isResynchronize(json);
 
         if (!hasResynchronize && resyncInProgress) {
-            Logger.getLogger(MessageHandler.class.getName())
-                .warning("Dropping the response of a request before a resync request.");
+            getLogger().warning(
+                    "Dropping the response of a request before a resync request.");
             return;
         }
 
@@ -374,7 +375,7 @@ public class MessageHandler {
             }
         }
         handleUIDLDuration
-        .logDuration(" * Handling resources from server completed", 10);
+                .logDuration(" * Handling resources from server completed", 10);
 
         getLogger().info(" * Handling type inheritance map from server");
 
@@ -502,7 +503,7 @@ public class MessageHandler {
                 if (json.containsKey("dd")) {
                     // response contains data for drag and drop service
                     VDragAndDropManager.get()
-                    .handleServerResponse(json.getValueMap("dd"));
+                            .handleServerResponse(json.getValueMap("dd"));
                 }
 
                 unregisterRemovedConnectors(
@@ -660,13 +661,13 @@ public class MessageHandler {
 
                     if (child instanceof ComponentConnector
                             && ((ComponentConnector) child)
-                            .delegateCaptionHandling()) {
+                                    .delegateCaptionHandling()) {
                         ServerConnector parent = child.getParent();
                         if (parent instanceof HasComponentsConnector) {
                             Profiler.enter(
                                     "HasComponentsConnector.updateCaption");
                             ((HasComponentsConnector) parent)
-                            .updateCaption((ComponentConnector) child);
+                                    .updateCaption((ComponentConnector) child);
                             Profiler.leave(
                                     "HasComponentsConnector.updateCaption");
                         }
@@ -745,7 +746,7 @@ public class MessageHandler {
                     throw new RuntimeException(
                             "Missing data needed to invoke @DelegateToWidget for "
                                     + component.getClass().getSimpleName(),
-                                    e);
+                            e);
                 }
             }
 
@@ -823,8 +824,8 @@ public class MessageHandler {
 
                 JsArrayString detachedArray = detachedConnectors.dump();
                 for (int i = 0; i < detachedArray.length(); i++) {
-                    ServerConnector connector = getConnectorMap().getConnector(
-                            detachedArray.get(i));
+                    ServerConnector connector = getConnectorMap()
+                            .getConnector(detachedArray.get(i));
 
                     Profiler.enter(
                             "unregisterRemovedConnectors unregisterConnector");
@@ -840,7 +841,7 @@ public class MessageHandler {
                 }
 
                 getLogger().info("* Unregistered " + detachedArray.length()
-                + " connectors");
+                        + " connectors");
                 Profiler.leave("unregisterRemovedConnectors");
             }
 
@@ -921,7 +922,7 @@ public class MessageHandler {
                 }
 
                 getLogger()
-                .info(" * Passing UIDL to Vaadin 6 style connectors");
+                        .info(" * Passing UIDL to Vaadin 6 style connectors");
                 // update paintables
                 for (int i = 0; i < length; i++) {
                     try {
@@ -946,16 +947,16 @@ public class MessageHandler {
                                 Profiler.leave(key);
                             }
                         } else if (legacyConnector == null) {
-                            getLogger().severe(
-                                    "Received update for " + uidl.getTag()
+                            getLogger().severe("Received update for "
+                                    + uidl.getTag()
                                     + ", but there is no such paintable ("
                                     + connectorId + ") rendered.");
                         } else {
-                            getLogger()
-                            .severe("Server sent Vaadin 6 style updates for "
-                                    + Util.getConnectorString(
-                                            legacyConnector)
-                                    + " but this is not a Vaadin 6 Paintable");
+                            getLogger().severe(
+                                    "Server sent Vaadin 6 style updates for "
+                                            + Util.getConnectorString(
+                                                    legacyConnector)
+                                            + " but this is not a Vaadin 6 Paintable");
                         }
 
                     } catch (final Throwable e) {
@@ -1048,8 +1049,8 @@ public class MessageHandler {
 
                             if (connector instanceof HasJavaScriptConnectorHelper) {
                                 ((HasJavaScriptConnectorHelper) connector)
-                                .getJavascriptConnectorHelper()
-                                .setNativeState(jso);
+                                        .getJavascriptConnectorHelper()
+                                        .setNativeState(jso);
                             }
 
                             SharedState state = connector.getState();
@@ -1257,7 +1258,7 @@ public class MessageHandler {
                         newChildren.add(childConnector);
                         if (childConnector instanceof ComponentConnector) {
                             newComponents
-                            .add((ComponentConnector) childConnector);
+                                    .add((ComponentConnector) childConnector);
                         } else if (!(childConnector instanceof AbstractExtensionConnector)) {
                             throw new IllegalStateException(Util
                                     .getConnectorString(childConnector)
@@ -1432,7 +1433,7 @@ public class MessageHandler {
                 Profiler.enter(
                         prefix + "recursivelyDetach clear children and parent");
                 connector
-                .setChildren(Collections.<ServerConnector> emptyList());
+                        .setChildren(Collections.<ServerConnector> emptyList());
                 connector.setParent(null);
                 Profiler.leave(
                         prefix + "recursivelyDetach clear children and parent");
@@ -1478,7 +1479,7 @@ public class MessageHandler {
                     Profiler.enter("handleRpcInvocations");
 
                     getLogger()
-                    .info(" * Performing server to client RPC calls");
+                            .info(" * Performing server to client RPC calls");
 
                     JsonArray rpcCalls = Util
                             .jso2json(json.getJavaScriptObject("rpc"));
@@ -1623,7 +1624,7 @@ public class MessageHandler {
         }
     }
 
-    private static native final int calculateBootstrapTime()
+    private static final native int calculateBootstrapTime()
     /*-{
         if ($wnd.performance && $wnd.performance.timing) {
             return (new Date).getTime() - $wnd.performance.timing.responseStart;
@@ -1732,7 +1733,7 @@ public class MessageHandler {
     }
 
     /**
-     * Checks if the first UIDL has been handled
+     * Checks if the first UIDL has been handled.
      *
      * @return true if the initial UIDL has already been processed, false
      *         otherwise
@@ -1786,7 +1787,7 @@ public class MessageHandler {
     }
 
     /**
-     * Unwraps and parses the given JSON, originating from the server
+     * Unwraps and parses the given JSON, originating from the server.
      *
      * @param jsonText
      *            the json from the server
@@ -1820,7 +1821,7 @@ public class MessageHandler {
     }-*/;
 
     /**
-     * Parse the given wrapped JSON, received from the server, to a ValueMap
+     * Parse the given wrapped JSON, received from the server, to a ValueMap.
      *
      * @param wrappedJsonText
      *            the json, wrapped as done by the server

@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2000-2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full
+ * license.
+ */
 package com.vaadin.tests.components.grid.basicfeatures.client;
 
 import static org.junit.Assert.assertEquals;
@@ -13,7 +21,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.vaadin.shared.ui.grid.Range;
 import com.vaadin.shared.ui.grid.ScrollDestination;
@@ -84,9 +94,24 @@ public class GridDetailsClientTest extends GridBasicClientFeaturesTest {
         // scroll a bit beyond so we see below.
         getGridElement().scrollToRow(101);
 
-        TestBenchElement details = getGridElement().getDetails(100);
-        assertTrue("Unexpected details content",
-                details.getText().startsWith("Row: 100."));
+        final TestBenchElement details = getGridElement().getDetails(100);
+        waitUntil(new ExpectedCondition<Object>() {
+            String expected = "Row: 100.";
+            private String actual;
+
+            @Override
+            public Object apply(WebDriver driver) {
+                actual = details.getText();
+                return actual.startsWith(expected);
+            }
+
+            @Override
+            public String toString() {
+                // waiting for ...
+                return "details content to start with '" + expected
+                        + "' (was: '" + actual + "')";
+            }
+        });
     }
 
     @Test

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-root</artifactId>
-        <version>7.7.30.SEE3-SNAPSHOT</version>
+        <version>7.7-SNAPSHOT</version>
     </parent>
     <groupId>com.vaadin</groupId>
     <artifactId>vaadin-server</artifactId>
@@ -17,27 +18,11 @@
     <dependencies>
         <!-- API DEPENDENCIES -->
 
-        <!-- Liferay Portal Service -->
-        <dependency>
-            <groupId>com.liferay.portal</groupId>
-            <artifactId>portal-service</artifactId>
-            <version>${liferay.portal.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--Servlet API version 3.0 -->
+        <!--Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${javax.servlet.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--Portlet API version 2.0 (JSR-286) -->
-        <dependency>
-            <groupId>javax.portlet</groupId>
-            <artifactId>portlet-api</artifactId>
-            <version>${javax.portlet.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -63,7 +48,7 @@
             <artifactId>vaadin-sass-compiler</artifactId>
             <version>${vaadin.sass.version}</version>
             <exclusions>
-                <!-- No need to have the minifier included for development 
+                <!-- No need to have the minifier included for development
                     mode on-the-fly compilation -->
                 <exclusion>
                     <groupId>com.yahoo.platform.yui</groupId>
@@ -88,7 +73,7 @@
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>license-checker</artifactId>
-            <version>1.0.5</version>
+            <version>1.11.2</version>
         </dependency>
 
         <!-- Jsoup for BootstrapHandler -->
@@ -96,6 +81,23 @@
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
+        </dependency>
+
+        <!-- JNA -->
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna-platform</artifactId>
+            <version>${jna.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.oshi</groupId>
+            <artifactId>oshi-core</artifactId>
+            <version>${oshi.version}</version>
         </dependency>
 
         <!-- TESTING DEPENDENCIES -->
@@ -215,11 +217,48 @@
                         </goals>
                         <configuration>
                             <target>
-                                <property name="vaadinBootstrap.js" location="${project.build.outputDirectory}/VAADIN/vaadinBootstrap.js" />
+                                <property name="vaadinBootstrap.js"
+                                    location="${project.build.outputDirectory}/VAADIN/vaadinBootstrap.js" />
 
                                 <!-- Gzipped version -->
-                                <gzip src="${vaadinBootstrap.js}" destfile="${vaadinBootstrap.js}.gz" />
+                                <gzip src="${vaadinBootstrap.js}"
+                                    destfile="${vaadinBootstrap.js}.gz" />
                             </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sources-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Only include java files -->
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <executions>
+                    <execution>
+                        <id>generate-javadoc</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <failOnError>false</failOnError>
                         </configuration>
                     </execution>
                 </executions>

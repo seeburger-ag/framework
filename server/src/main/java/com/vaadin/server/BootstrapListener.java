@@ -1,25 +1,16 @@
 /*
- * Copyright 2000-2022 Vaadin Ltd.
+ * Copyright (C) 2000-2023 Vaadin Ltd
  *
- * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4);
- * you may not use this file except in compliance with the License. You may obtain
- * a copy of the License at
+ * This program is available under Vaadin Commercial License and Service Terms.
  *
- * https://vaadin.com/license/cvdl-4.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full
+ * license.
  */
 
 package com.vaadin.server;
 
 import java.io.Serializable;
 import java.util.EventListener;
-
-import javax.portlet.RenderResponse;
 
 /**
  * Event listener notified when the bootstrap HTML is about to be generated and
@@ -35,7 +26,7 @@ public interface BootstrapListener extends EventListener, Serializable {
      * Lets this listener make changes to the fragment that makes up the actual
      * Vaadin application. In a typical Servlet deployment, this is the contents
      * of the HTML body tag. In a typical Portlet deployment, this is the HTML
-     * that will be returned in a {@link RenderResponse}.
+     * that will be returned in a {@code javax.portlet.RenderResponse}.
      *
      * @param response
      *            the bootstrap response that can modified to cause changes in

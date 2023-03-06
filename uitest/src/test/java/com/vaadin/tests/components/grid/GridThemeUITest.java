@@ -1,10 +1,20 @@
+/*
+ * Copyright (C) 2000-2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full
+ * license.
+ */
 package com.vaadin.tests.components.grid;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import com.vaadin.testbench.elements.ButtonElement;
 import com.vaadin.testbench.elements.DateFieldElement;
@@ -71,18 +81,34 @@ public class GridThemeUITest extends MultiBrowserThemeTest {
         compareScreen("two-invalid");
     }
 
-    private void openEditor(GridCellElement targetCell) {
+    private void openEditor(final GridCellElement targetCell) {
         new Actions(getDriver()).doubleClick(targetCell).perform();
         try {
-            if (grid.getEditor().isDisplayed()) {
-                return;
-            }
+            waitForElementPresent(By.className("v-grid-editor"));
         } catch (Exception e) {
-
+            // Double-click is flaky, try again...
+            new Actions(getDriver()).doubleClick(targetCell).perform();
+            waitForElementPresent(By.className("v-grid-editor"));
         }
+        final WebElement editor = findElement(By.className("v-grid-editor"));
+        waitUntil(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver arg0) {
+                int current = editor.getSize().getHeight();
+                // it's actually expected to be the height of two rows plus one
+                // pixel, but giving it 2 pixels of leeway
+                int expected = targetCell.getSize().getHeight() * 2 - 1;
+                return current >= expected;
+            }
 
-        // Try again if IE happen to fail..
-        new Actions(getDriver()).doubleClick(targetCell).perform();
+            @Override
+            public String toString() {
+                // Expected condition failed: waiting for ...
+                return "editor to become visible, current height: "
+                        + editor.getSize().getHeight() + ", row height: "
+                        + targetCell.getSize().getHeight();
+            }
+        });
     }
 
     /**

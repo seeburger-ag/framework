@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2000-2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full
+ * license.
+ */
 package com.vaadin.tests.server.component.richtextarea;
 
 import org.junit.Test;
@@ -10,7 +18,7 @@ public class RichTextAreaDeclarativeTest
 
     private String getBasicDesign() {
         return "<vaadin-rich-text-area null-representation='' null-setting-allowed>\n"
-                + "\n      <b>Header</b> <br/>Some text\n      "
+                + "\n      <b>Header</b><br/>Some text\n      "
                 + "</vaadin-rich-text-area>";
     }
 
@@ -18,7 +26,7 @@ public class RichTextAreaDeclarativeTest
         RichTextArea rta = new RichTextArea();
         rta.setNullRepresentation("");
         rta.setNullSettingAllowed(true);
-        rta.setValue("<b>Header</b> \n<br>Some text");
+        rta.setValue("<b>Header</b>\n<br>Some text");
         return rta;
     }
 

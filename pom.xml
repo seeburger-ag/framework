@@ -24,7 +24,7 @@
         <!-- Used version numbers for dependencies -->
         <commons-io.version>2.4</commons-io.version>
         <google.appengine.version>1.7.7</google.appengine.version>
-        <jsoup.version>1.14.3</jsoup.version>
+        <jsoup.version>1.15.3</jsoup.version>
         <liferay.portal.version>6.0.2</liferay.portal.version>
 
         <vaadin.sass.version>0.9.13</vaadin.sass.version>
@@ -40,14 +40,17 @@
 
         <!-- Atmosphere versions -->
         <!-- Note that this should be kept in sync with the class Constants -->
-        <atmosphere.runtime.version>2.2.13.vaadin3</atmosphere.runtime.version>
+        <atmosphere.runtime.version>2.2.13.vaadin4</atmosphere.runtime.version>
         <atmosphere.js.version>2.2.13.vaadin5</atmosphere.js.version>
 
         <!-- Dependency unpack directory -->
         <dependency.unpack.directory>${project.build.directory}/dependency-unpack</dependency.unpack.directory>
 
-        <jetty.version>9.4.38.v20210224</jetty.version>
+        <jetty.version>9.4.48.v20220622</jetty.version>
         <phantomjs.version>2.1.1</phantomjs.version>
+
+        <jna.version>5.10.0</jna.version>
+        <oshi.version>6.1.4</oshi.version>
     </properties>
 
     <repositories>
@@ -59,7 +62,7 @@
             </snapshots>
         </repository>
     </repositories>
-    
+
     <!-- TODO: remove this after maven plugin has been released -->
     <pluginRepositories>
         <pluginRepository>
@@ -82,9 +85,9 @@
     <description>Vaadin Framework Root Pom</description>
     <licenses>
         <license>
-            <name>Apache License Version 2.0</name>
+            <name>Vaadin Commercial License</name>
             <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <url>https://vaadin.com/commercial-license-and-service-terms</url>
         </license>
     </licenses>
     <scm>
@@ -98,6 +101,7 @@
         <module>shared</module>
         <module>push</module>
         <module>server</module>
+        <module>portlet</module>
         <module>client</module>
         <module>client-compiler</module>
         <module>client-compiled</module>
@@ -105,6 +109,7 @@
         <module>widgets</module>
         <module>uitest</module>
         <module>liferay</module>
+        <module>server-mpr-jakarta</module>
         <module>all</module>
         <!-- Nexus staging bug needs the last module to be deployed. -->
         <module>bom</module>
@@ -207,7 +212,7 @@
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>2.17</version>
                     <dependencies>
-                        <!-- Needed because of a JavadocMethodCheck bug in 
+                        <!-- Needed because of a JavadocMethodCheck bug in
                             6.11 -->
                         <dependency>
                             <groupId>com.puppycrawl.tools</groupId>
@@ -336,7 +341,7 @@
             </modules>
         </profile>
         <profile>
-            <!-- Snapshot build only builds artifacts that are deployed or 
+            <!-- Snapshot build only builds artifacts that are deployed or
                 needed by them -->
             <id>snapshot</id>
             <properties>
@@ -442,6 +447,7 @@
             <id>apicmp</id>
             <modules>
                 <module>server</module>
+                <module>portlet</module>
                 <module>push</module>
                 <module>client</module>
                 <module>client-compiler</module>

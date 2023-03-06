@@ -41,6 +41,12 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>vaadin-portlet</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>vaadin-themes</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -68,6 +74,13 @@
             <artifactId>vaadin-widgets</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>vaadin-server-mpr-jakarta</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -230,7 +243,7 @@
             </activation>
             <build>
                 <plugins>
-                
+
                     <!-- Extract sources for JavaDoc -->
                     <plugin>
                         <artifactId>maven-dependency-plugin</artifactId>

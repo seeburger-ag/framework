@@ -1,17 +1,10 @@
 /*
- * Copyright 2000-2022 Vaadin Ltd.
+ * Copyright (C) 2000-2023 Vaadin Ltd
  *
- * Licensed under the Commercial Vaadin Developer License version 4.0 (CVDLv4);
- * you may not use this file except in compliance with the License. You may obtain
- * a copy of the License at
+ * This program is available under Vaadin Commercial License and Service Terms.
  *
- * https://vaadin.com/license/cvdl-4.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full
+ * license.
  */
 
 package com.vaadin.server;
@@ -44,8 +37,6 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.portlet.Portlet;
-import javax.portlet.PortletContext;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -315,7 +306,6 @@ public abstract class VaadinService implements Serializable {
      * @return a String specifying the file's MIME type
      *
      * @see ServletContext#getMimeType(String)
-     * @see PortletContext#getMimeType(String)
      */
     public abstract String getMimeType(String resourceName);
 
@@ -612,11 +602,11 @@ public abstract class VaadinService implements Serializable {
      * Note: Overriding this method is not recommended, for custom lock storage
      * strategy override {@link #getSessionLock(WrappedSession)} and
      * {@link #setSessionLock(WrappedSession,Lock)} instead.
-     * 
+     *
      * @param wrappedSession
      *            The session to lock
      * @return Lock instance
-     * 
+     *
      * @throws IllegalStateException
      *             if the session is invalidated before it can be locked
      */
@@ -1952,7 +1942,6 @@ public abstract class VaadinService implements Serializable {
      *
      * @see #addServiceDestroyListener(ServiceDestroyListener)
      * @see Servlet#destroy()
-     * @see Portlet#destroy()
      *
      * @since 7.2
      */

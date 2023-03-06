@@ -1,3 +1,11 @@
+/*
+ * Copyright (C) 2000-2023 Vaadin Ltd
+ *
+ * This program is available under Vaadin Commercial License and Service Terms.
+ *
+ * See <https://vaadin.com/commercial-license-and-service-terms> for the full
+ * license.
+ */
 package com.vaadin.tests.server;
 
 import java.io.File;
@@ -28,6 +36,7 @@ public class ClassesSerializableTest {
     private static String[] BASE_PACKAGES = { "com.vaadin" };
 
     private static String[] EXCLUDED_PATTERNS = { //
+            "com\\.vaadin\\.open\\..*", //        
             "com\\.vaadin\\.demo\\..*", //
             "com\\.vaadin\\.external\\.org\\.apache\\.commons\\.fileupload\\..*", //
             "com\\.vaadin\\.launcher\\..*", //

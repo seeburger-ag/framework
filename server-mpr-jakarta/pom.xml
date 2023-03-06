@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-root</artifactId>
-        <version>7.7-SNAPSHOT</version>
+        <version>7.7.38.SEE1-SNAPSHOT</version>
     </parent>
     <artifactId>vaadin-server-mpr-jakarta</artifactId>
     <name>vaadin-server-mpr-jakarta</name>

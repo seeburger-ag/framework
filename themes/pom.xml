@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vaadin</groupId>
         <artifactId>vaadin-root</artifactId>
-        <version>7.7.30.SEE3-SNAPSHOT</version>
+        <version>7.7.38.SEE1-SNAPSHOT</version>
     </parent>
     <groupId>com.vaadin</groupId>
     <artifactId>vaadin-themes</artifactId>
